@@ -58,7 +58,7 @@ export default function Footer() {
             <h3 className="font-semibold mb-4">Connect</h3>
             <div className="flex space-x-4">
               <Link
-                href="https://x.com/FernandoMedia"
+                href="https://x.com/kasuns"
                 className="text-gray-300 hover:text-white transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -68,7 +68,7 @@ export default function Footer() {
                 </svg>
               </Link>
               <Link
-                href="https://www.linkedin.com/in/fernandoraymond"
+                href="https://www.linkedin.com/in/kasun-sameera-63741816"
                 className="text-gray-300 hover:text-white transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -78,7 +78,7 @@ export default function Footer() {
                 </svg>
               </Link>
               <Link
-                href="https://www.instagram.com/fernandoraymond_"
+                href="#"
                 className="text-gray-300 hover:text-white transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -88,7 +88,7 @@ export default function Footer() {
                 </svg>
               </Link>
               <Link
-                href="https://www.youtube.com/@fernandoraymond"
+                href="#"
                 className="text-gray-300 hover:text-white transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
