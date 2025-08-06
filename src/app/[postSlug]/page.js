@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import config from "@/config";
 import fetchPosts from "@/data/fetchPosts";
-import BlocksRendererClient from "@/components/blogs/BlocksRendererClient";
 import HTMLRendererClient from "@/components/blogs/HTMLRendererClient";
 import BacktoTop from "@/components/shared/BacktoTop";
 import ShareButtons from "@/components/blogs/ShareButtons";
