@@ -102,7 +102,7 @@ export default function Header() {
     return (
         <>
             <nav
-                className={`fixed top-0 left-0 right-0 z-50 w-full bg-white text-black p-4 lg:p-0 transition-shadow duration-300 ${isScrolled ? 'shadow-lg' : ''
+                className={`fixed top-0 left-0 right-0 z-50 w-full bg-black text-white p-4 lg:p-0 transition-shadow duration-300 ${isScrolled ? 'shadow-lg' : ''
                     }`}
             >
                 <div className="container mx-auto flex items-center justify-between md:pl-10">

@@ -123,7 +123,6 @@ const CategoryPage = async (props) => {
 
         return (
             <>
-                <div className="relative inset-0 w-[72%] h-5 bg-gradient-to-r from-[#09407A] to-[#136CC9] rounded-br-[100px]"></div>
 
                 <section className="container mx-auto px-4 py-8 max-w-7xl">
 
@@ -131,11 +130,11 @@ const CategoryPage = async (props) => {
                         <nav className="text-sm text-gray-500 mb-4">
                             <Link href="/" className="hover:text-[#2072CC]">Home</Link>
                             <span className="mx-2">›</span>
-                            <span className="text-gray-700">{validCategory}</span>
+                            <span className="text-gray-500">{validCategory}</span>
                         </nav>
 
                         <h1 className="text-2xl md:text-4xl font-bold mb-4">{validCategory}</h1>
-                        <p className="text-lg text-gray-600">
+                        <p className="text-lg text-gray-500">
                             {pagination?.total || 0} {pagination?.total === 1 ? 'post' : 'posts'} in this category
                             {pagination && pagination.pageCount > 1 && (
                                 <span className="text-sm text-gray-500 ml-2">
@@ -149,7 +148,7 @@ const CategoryPage = async (props) => {
                         <>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {categoryPosts.map((blog) => (
-                                    <article key={blog.id} className="rounded-lg overflow-hidden shadow-sm bg-white hover:shadow-md transition-shadow">
+                                    <article key={blog.id} className="rounded-lg overflow-hidden shadow-sm bg-black hover:border-gray-500 transition-border border border-gray-900">
                                         {blog.postMetadata?.thumbnail?.url && (
                                             <div className="relative aspect-video">
                                                 <Image

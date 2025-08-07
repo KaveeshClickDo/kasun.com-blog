@@ -82,7 +82,7 @@ const FeaturedSlider = ({ featuredBlogs, config }) => {
     
     return (
       <div className="mb-12">
-        <div className={`flex flex-col ${hasImage ? 'md:flex-row' : ''} gap-6 items-center bg-[#F5FAFF] overflow-hidden`}>
+        <div className={`flex flex-col ${hasImage ? 'md:flex-row' : ''} gap-6 items-center bg-black overflow-hidden border border-gray-900 rounded-lg`}>
           {hasImage && (
             <div className="relative w-full md:w-1/2 aspect-[611/343]">
               <Image
@@ -101,7 +101,7 @@ const FeaturedSlider = ({ featuredBlogs, config }) => {
                 {featuredBlog.title || 'Blog post title'}
               </Link>
             </h1>
-            <p className="md:text-lg text-gray-700 mb-6">{featuredBlog.postPrimary?.excerpt || 'No description available'}</p>
+            <p className="md:text-lg text-gray-500 mb-6">{featuredBlog.postPrimary?.excerpt || 'No description available'}</p>
             {renderAuthorSection(featuredBlog)}
           </div>
         </div>
