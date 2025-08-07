@@ -31,16 +31,6 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/category/blogging" className="text-gray-300 hover:text-white transition-colors">
-                  Blogging
-                </Link>
-              </li>
-              <li>
-                <Link href="/category/business" className="text-gray-300 hover:text-white transition-colors">
-                  Business
-                </Link>
-              </li>
-              <li>
                 <Link href="#" className="text-gray-300 hover:text-white transition-colors">
                   About
                 </Link>

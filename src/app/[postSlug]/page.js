@@ -158,7 +158,7 @@ const BlogPost = async (props) => {
         return (
             <>
 
-                <article className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
+                <article className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
 
                     {/* Add JSON-LD structured data */}
                     {blog.data.map((post) => {
@@ -267,11 +267,11 @@ const BlogPost = async (props) => {
                         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
                             <div className="lg:col-span-3">
                                 {blog.data.map((post) => (
-                                    <div key={post.id} className="bg-gray-900 rounded-3xl shadow-xl p-8 lg:p-12 relative overflow-hidden">
+                                    <div key={post.id} className="bg-white rounded-3xl shadow-xl p-8 lg:p-12 relative overflow-hidden">
                                         <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-purple-100 to-transparent rounded-full opacity-50 -translate-y-32 translate-x-32"></div>
 
                                         <div className="flex flex-wrap items-center gap-4 text-sm mb-4">
-                                            <span className="inline-flex items-center px-3 py-1 rounded-full bg-gray-500/20 backdrop-blur-sm font-medium border border-gray-600/30">
+                                            <span className="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/20 backdrop-blur-sm font-medium border border-blue-600/30">
                                                 {post.postPrimary?.category}
                                             </span>
                                             <span>{post.updatedAt?.substring(0, 10)}</span>
@@ -281,15 +281,15 @@ const BlogPost = async (props) => {
                                             {post.title}
                                         </h1>
 
-                                        <div className="mb-4 pb-5 border-b border-gray-500">
+                                        <div className="mb-4 pb-5 border-b border-gray-200">
                                             {post.postPrimary?.isDisplayAuthor === "YES" && (
                                                 <div className="flex items-center space-x-4">
                                                     {renderAuthorAvatar(post.authorDetails?.authorImage, post.authorDetails?.authorName)}
                                                     <div>
-                                                        <h3 className="text-lg font-semibold">
+                                                        <h3 className="text-lg font-semibold text-gray-900">
                                                             Written by {post.authorDetails?.authorName || 'Unknown'}
                                                         </h3>
-                                                        <p className="text-gray-500">
+                                                        <p className="text-gray-600">
                                                             {post.authorDetails?.authorRole || 'No role available'}
                                                         </p>
                                                     </div>
@@ -319,16 +319,18 @@ const BlogPost = async (props) => {
                                             </div>
 
                                             {post.postPrimary?.isDisplayAuthor === "YES" && (
-                                                <div className="mt-12 p-6 bg-gray-800 rounded-2xl border border-gray-500">
-                                                    <h3 className="text-xl font-bold mb-6 pb-5 border-b border-gray-500">Author Profile</h3>
+                                                <div className="mt-8 sm:mt-12 p-4 sm:p-6 bg-gray-50 rounded-xl sm:rounded-2xl border border-gray-200">
+                                                    <h3 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6 pb-3 sm:pb-5 border-b border-gray-200">
+                                                        Author Profile
+                                                    </h3>
 
-                                                    <div className="flex items-start space-x-4">
-                                                        <div className="flex-shrink-0">
+                                                    <div className="flex flex-col sm:flex-row sm:items-start space-y-4 sm:space-y-0 sm:space-x-4">
+                                                        <div className="flex-shrink-0 self-center sm:self-start">
                                                             {renderAuthorAvatar(post.authorDetails?.authorImage, post.authorDetails?.authorName, 100)}
                                                         </div>
 
-                                                        <div className="flex-1 ml-3">
-                                                            <h4 className="text-lg font-bold mb-2">
+                                                        <div className="flex-1 text-center sm:text-left sm:ml-3">
+                                                            <h4 className="text-base sm:text-lg font-bold mb-2">
                                                                 {post.authorDetails?.authorName || 'Unknown'}
                                                             </h4>
                                                             <p className="text-gray-700 text-sm leading-relaxed">
@@ -354,15 +356,15 @@ const BlogPost = async (props) => {
                                 <div className="text-center mb-6">
                                     <div className="mb-4">
                                         <h3 className="text-2xl font-bold my-2">Free SSL Certificates</h3>
-                                        <Image src="/images/shared/header-logo.png" alt="SeekaHost" className="mx-auto" width={266} height={124} priority />
+                                        <Image src="/images/shared/header-logo.webp" alt="SeekaHost" className="mx-auto" width={266} height={124} priority />
                                     </div>
                                     <Link href='/pricing' className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-4 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                                         Get Started Free
                                     </Link>
                                 </div>
 
-                                <div className="bg-gray-900 rounded-2xl shadow-lg p-6 mb-6">
-                                    <h3 className="text-xl font-bold mb-6">Recent Posts</h3>
+                                <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
+                                    <h3 className="text-xl font-bold text-gray-900 mb-6">Recent Posts</h3>
 
                                     <div className="space-y-4">
                                         {recentPosts.length > 0 ? (
@@ -385,7 +387,7 @@ const BlogPost = async (props) => {
                                     </div>
                                 </div>
 
-                                <div className="text-center mb-6 sticky top-4">
+                                <div className="text-center mb-6 sticky top-15">
                                     <Image src="/images/blog/blogAds.webp" alt="SeekaHost" className="mx-auto" width={266} height={124} />
                                 </div>
                             </div>

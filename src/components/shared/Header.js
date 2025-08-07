@@ -30,18 +30,6 @@ export default function Header() {
                 Home
             </Link>
             <Link
-                href="/category/blogging"
-                className="relative p-4 hover:underline"
-            >
-                Blogging
-            </Link>
-            <Link
-                href="/category/business"
-                className="relative p-4 hover:underline"
-            >
-                Business
-            </Link>
-            <Link
                 href="#"
                 className="relative p-4 hover:underline"
             >
@@ -66,13 +54,6 @@ export default function Header() {
                 }`}
         >
             <div className="pt-8 pb-3 space-y-1">
-
-                <Link href="/category/blogging" className="block px-4 py-2 hover:bg-gray-100 text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
-                    Blogging
-                </Link>
-                <Link href="/category/business" className="block px-4 py-2 hover:bg-gray-100 text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
-                    Business
-                </Link>
                 <Link href="#" className="block px-4 py-2 hover:bg-gray-100 text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
                     About
                 </Link>

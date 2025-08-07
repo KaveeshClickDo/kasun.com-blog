@@ -2,15 +2,15 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
+  --background: #ffffff;
+  --foreground: #092a44;
   --font-dm-sans: 'DM Sans', sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #000000;
-    --foreground: #ffffff;
+    --background: #ffffff;
+    --foreground: #092a44;
     --font-dm-sans: 'DM Sans', sans-serif;
   }
 }

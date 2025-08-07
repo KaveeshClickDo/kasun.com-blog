@@ -42,7 +42,7 @@ const Home = async () => {
                         {topStoriesPosts.data && topStoriesPosts.data.length > 0 ? (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {topStoriesPosts.data.map((topBlog) => (
-                                    <div key={topBlog.id} className="rounded-lg overflow-hidden shadow-sm bg-black hover:border-gray-500 transition-border border border-gray-900">
+                                    <div key={topBlog.id} className="rounded-lg overflow-hidden shadow-sm bg-white hover:shadow-md transition-shadow">
                                         {topBlog.postMetadata?.thumbnail?.url && (
                                             <div className="relative aspect-video">
                                                 <Image
@@ -74,7 +74,7 @@ const Home = async () => {
                                                 </Link>
                                             </h3>
 
-                                            <p className="text-sm md:text-base text-gray-500 mb-4 line-clamp-3">{topBlog.postPrimary?.excerpt || 'No description available'}</p>
+                                            <p className="text-sm md:text-base text-gray-700 mb-4 line-clamp-3">{topBlog.postPrimary?.excerpt || 'No description available'}</p>
                                         </div>
                                     </div>
                                 ))}
@@ -94,7 +94,7 @@ const Home = async () => {
                                 {categoryPosts[category] && categoryPosts[category].length > 0 ? (
                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                         {categoryPosts[category].map((blog) => (
-                                            <div key={blog.id} className="rounded-lg overflow-hidden shadow-sm bg-black hover:border-gray-500 transition-border border border-gray-900">
+                                            <div key={blog.id} className="rounded-lg overflow-hidden shadow-sm bg-white hover:shadow-md transition-shadow">
                                                 {blog.postMetadata?.thumbnail?.url && (
                                                     <div className="relative aspect-video">
                                                         <Image
@@ -126,7 +126,7 @@ const Home = async () => {
                                                         </Link>
                                                     </h3>
 
-                                                    <p className="text-sm md:text-base text-gray-500 mb-4 line-clamp-3">{blog.postPrimary?.excerpt || 'No description available'}</p>
+                                                    <p className="text-sm md:text-base text-gray-700 mb-4 line-clamp-3">{blog.postPrimary?.excerpt || 'No description available'}</p>
                                                 </div>
                                             </div>
                                         ))}
