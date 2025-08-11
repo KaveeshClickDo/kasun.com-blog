@@ -10,8 +10,8 @@ export default function About() {
                         We Never Do Normal
                     </h1>
                     <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        At Kasun, we're not in the business to simply recreate. Instead, we innovate.
-                        We're a global AI agency specializing in software, content, music, and influencer marketing.
+                        At Kasun, we&apos;re not in the business to simply recreate. Instead, we innovate.
+                        We&apos;re a global AI agency specializing in software, content, music, and influencer marketing.
                     </p>
                 </div>
             </section>
@@ -22,7 +22,7 @@ export default function About() {
                     <div className="text-center mb-16">
                         <h2 className="text-4xl font-bold text-gray-900 mb-4">What We Actually Do</h2>
                         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                            We understand how to connect people. Content is communication and it's what we do best.
+                            We understand how to connect people. Content is communication and it&apos;s what we do best.
                         </p>
                     </div>
 
@@ -100,7 +100,7 @@ export default function About() {
                             <h3 className="text-2xl font-bold text-[#406BAC] mb-4">Goal</h3>
                             <p className="text-gray-600 leading-relaxed">
                                 Our goal is to continuously innovate and expand our services to meet evolving client needs.
-                                We're committed to fostering a culture of excellence and making a lasting impact through our expertise.
+                                We&apos;re committed to fostering a culture of excellence and making a lasting impact through our expertise.
                             </p>
                         </div>
                     </div>

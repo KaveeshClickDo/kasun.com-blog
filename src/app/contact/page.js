@@ -195,7 +195,7 @@ export default function Contact() {
                                         Comments <span className="text-red-500">*</span>
                                     </label>
                                     <p className="text-sm text-gray-600 mb-2">
-                                        Please tell us know what's on your mind. Have a question for us? Ask away.
+                                        Please tell us know what&apos;s on your mind. Have a question for us? Ask away.
                                     </p>
                                     <textarea
                                         name="comments"

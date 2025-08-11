@@ -15,7 +15,7 @@ export default function TermsOfService() {
           <section className="mb-8">
             <h2 className="text-xl font-semibold text-gray-900 mb-4">1. Acceptance of Terms</h2>
             <p className="text-gray-700">
-              By accessing and using the services of KASUNSAMEERA.COM ("we," "us," "our"), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by these terms, please do not use this site or our services.
+              By accessing and using the services of KASUNSAMEERA.COM (&quot;we,&quot; &quot;us,&quot; &quot;our&quot;), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by these terms, please do not use this site or our services.
             </p>
           </section>
 
