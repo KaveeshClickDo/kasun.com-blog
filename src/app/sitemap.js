@@ -2,11 +2,11 @@ import fetchPosts from '@/data/fetchPosts';
 
 export default async function sitemap() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.kasunsameera.com';
-  
+
   try {
     // Fetch all posts
     const allPosts = await fetchPosts('sort[0]=publishedAt:desc');
-    
+
     // Get categories
     const categoriesResponse = await fetchPosts();
     const uniqueCategories = [...new Set(
@@ -21,7 +21,20 @@ export default async function sitemap() {
         changeFrequency: 'always',
         priority: 1,
       },
+      {
+        url: `${baseUrl}/contact`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.8,
+      },
+      {
+        url: `${baseUrl}/about`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.8,
+      },
     ];
+
 
     // Blog posts
     const blogPosts = allPosts.data?.map(post => ({
@@ -40,10 +53,10 @@ export default async function sitemap() {
     }));
 
     return [...staticPages, ...blogPosts, ...categoryPages];
-    
+
   } catch (error) {
     console.error('Error generating sitemap:', error);
-    
+
     // Return at least the homepage if fetch fails
     return [
       {

@@ -12,7 +12,6 @@ const BACKGROUND_CIRCLES = [
 export default function NotFound() {
     return (
         <>
-            <div className="relative inset-0 w-[72%] h-5 bg-gradient-to-r from-[#09407A] to-[#136CC9] rounded-br-[100px]"></div>
             <div className="bg-white flex items-center justify-center px-4 py-12 relative overflow-hidden">
 
                 <style dangerouslySetInnerHTML={{
@@ -48,7 +47,7 @@ export default function NotFound() {
                 </div>
 
                 <div className="relative z-10 max-w-xl w-full text-center md:py-20">
-                    <div className="text-9xl font-bold text-[#1164BB] mb-4">
+                    <div className="text-9xl font-bold text-[#406BAC] mb-4">
                         404
                     </div>
 
@@ -62,7 +61,7 @@ export default function NotFound() {
                     </p>
 
                     <div>
-                        <Link href="/" className="inline-flex items-center px-6 py-3 rounded-lg bg-[#1164BB] text-white font-medium hover:bg-[#0d5196] transition-colors duration-300 shadow-lg hover:shadow-xl">
+                        <Link href="/" className="inline-flex items-center px-6 py-3 rounded-lg bg-[#406BAC] text-white font-medium hover:bg-[#0d5196] transition-colors duration-300 shadow-lg hover:shadow-xl">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                             </svg>

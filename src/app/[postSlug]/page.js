@@ -218,7 +218,7 @@ const BlogPost = async (props) => {
                                 "name": "Blog",
                                 "item": {
                                     "@type": "WebPage",
-                                    "@id": `${baseUrl}/blog`
+                                    "@id": `${baseUrl}`
                                 }
                             }
                         ];
@@ -231,7 +231,7 @@ const BlogPost = async (props) => {
                                 "name": post.postPrimary.category,
                                 "item": {
                                     "@type": "WebPage",
-                                    "@id": `${baseUrl}/blog/category/${post.postPrimary.category.toLowerCase().replace(/\s+/g, '-')}`
+                                    "@id": `${baseUrl}/category/${post.postPrimary.category.toLowerCase().replace(/\s+/g, '-')}`
                                 }
                             });
                         }
@@ -263,7 +263,27 @@ const BlogPost = async (props) => {
                         );
                     })}
 
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                        <nav className="text-sm text-gray-500 mb-4">
+                            <Link href="/" className="hover:text-[#2072CC]">Home</Link>
+                            <span className="mx-2">›</span>
+
+                            {blog.data?.[0]?.postPrimary?.category && (
+                                <>
+                                    <Link
+                                        href={`/category/${blog.data[0].postPrimary.category.toLowerCase().replace(/\s+/g, '-')}`}
+                                        className="hover:text-[#2072CC]"
+                                    >
+                                        {blog.data[0].postPrimary.category}
+                                    </Link>
+                                    <span className="mx-2">›</span>
+                                </>
+                            )}
+
+                            <span className="text-gray-700">{blog.data?.[0]?.title}</span>
+                        </nav>
+
+
                         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
                             <div className="lg:col-span-3">
                                 {blog.data.map((post) => (

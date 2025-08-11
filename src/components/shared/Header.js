@@ -30,13 +30,13 @@ export default function Header() {
                 Home
             </Link>
             <Link
-                href="#"
+                href="/about"
                 className="relative p-4 hover:underline"
             >
                 About
             </Link>
             <Link
-                href="#"
+                href="/contact"
                 className="relative p-4 hover:underline"
             >
                 Contact
@@ -54,10 +54,10 @@ export default function Header() {
                 }`}
         >
             <div className="pt-8 pb-3 space-y-1">
-                <Link href="#" className="block px-4 py-2 hover:bg-gray-100 text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
+                <Link href="/about" className="block px-4 py-2 hover:bg-gray-100 text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
                     About
                 </Link>
-                <Link href="#" className="block px-4 py-2 hover:bg-gray-100 text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
+                <Link href="/contact" className="block px-4 py-2 hover:bg-gray-100 text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
                     Contact Us
                 </Link>
             </div>
@@ -68,11 +68,11 @@ export default function Header() {
         <div className="md:hidden">
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="focus:outline-none" aria-label="Mobile Menu">
                 {mobileMenuOpen ? (
-                    <svg className="w-9 h-9" fill="none" stroke="black" viewBox="0 0 24 24">
+                    <svg className="w-9 h-9" fill="none" stroke="white" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 ) : (
-                    <svg className="w-10 h-10" fill="none" stroke="black" viewBox="0 0 24 24">
+                    <svg className="w-10 h-10" fill="none" stroke="white" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 8H13.75M5 12H19M10.25 16L19 16" />
                     </svg>
                 )}
@@ -83,7 +83,7 @@ export default function Header() {
     return (
         <>
             <nav
-                className={`fixed top-0 left-0 right-0 z-50 w-full bg-black text-white p-4 lg:p-0 transition-shadow duration-300 ${isScrolled ? 'shadow-lg' : ''
+                className={`fixed top-0 left-0 right-0 z-50 w-full bg-[#181819] text-white p-4 lg:p-0 transition-shadow duration-300 ${isScrolled ? 'shadow-lg' : ''
                     }`}
             >
                 <div className="container mx-auto flex items-center justify-between md:pl-10">
