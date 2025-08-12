@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
 
-export default function Blog() {
+export default function Category() {
   redirect('/')
 }
