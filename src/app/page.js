@@ -25,8 +25,6 @@ const Home = async () => {
             categoryPosts[category] = categoryPostsData.data || [];
         }
 
-        console.log(topStoriesPosts.data);
-
 
         return (
             <>

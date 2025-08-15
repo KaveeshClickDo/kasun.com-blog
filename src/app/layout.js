@@ -11,70 +11,114 @@ const dmSans = DM_Sans({
   variable: '--font-dm-sans',
 });
 
-// Generate metadata dynamically
 export async function generateMetadata() {
   try {
-    // Fetch metadata from your backend
+
     const metaResponse = await fetchPageMeta();
     const metaData = metaResponse?.data || {};
     
-    const websiteName = metaData.websiteName || 'Kasun Sameera';
-    const title = metaData.title || 'Top Lifestyle Blog by Kasun Sameera';
-    const description = metaData.description || 'Lifestyle Blog by Top Blogger Kasun Sameera. A personal blogging site, where you see passions, experiences, and journey as I explored the things I love doing';
+    const websiteName = metaData.websiteName || 'Website Name';
+    const title = metaData.title || 'Website Title';
+    const description = metaData.description || 'Website Description';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-    // Get images if available (full URLs for dynamic images)
-    const faviconUrl = metaData.favicon?.url ? `${process.env.NEXT_PUBLIC_BACKEND_URL || 'https://admin.kasunsameera.com'}${metaData.favicon.url}` : null;
-    const ogImageUrl = metaData.openGraphImage?.url ? `${process.env.NEXT_PUBLIC_BACKEND_URL || 'https://admin.kasunsameera.com'}${metaData.openGraphImage.url}` : null;
+    // Fallback images
+    const fallbackFavicon = '/favicon.ico'; // → public/favicon.ico
+    const fallbackOgImage = '/images/default-og-image.jpg'; // → public/images/default-og-image.jpg
+
+
+    const faviconUrl = metaData.favicon?.url 
+      ? `${backendUrl}${metaData.favicon.url}` 
+      : fallbackFavicon;
+    
+    const ogImageUrl = metaData.openGraphImage?.url 
+      ? `${backendUrl}${metaData.openGraphImage.url}` 
+      : `${baseUrl}${fallbackOgImage}`;
 
     return {
-      metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'),
+      metadataBase: new URL(baseUrl),
       title: {
         default: `${title} | ${websiteName}`,
         template: `%s | ${websiteName}`
       },
       description: description,
-      // Dynamic favicon
-      ...(faviconUrl && { 
-        icons: {
-          icon: faviconUrl,
-          shortcut: faviconUrl,
-          apple: faviconUrl,
-        }
-      }),
-      // Dynamic Open Graph image
+      
+
+      icons: {
+        icon: faviconUrl,
+        shortcut: faviconUrl,
+        apple: faviconUrl,
+      },
+      
+
       openGraph: {
         title: title,
         description: description,
         siteName: websiteName,
-        ...(ogImageUrl && { 
-          images: [
-            {
-              url: ogImageUrl,
-              width: metaData.openGraphImage?.width || 1200,
-              height: metaData.openGraphImage?.height || 630,
-              alt: metaData.openGraphImage?.alternativeText || title,
-            }
-          ]
-        }),
+        images: [
+          {
+            url: ogImageUrl,
+            width: metaData.openGraphImage?.width || 1200,
+            height: metaData.openGraphImage?.height || 630,
+            alt: metaData.openGraphImage?.alternativeText || title,
+          }
+        ],
       },
+      
+
       twitter: {
         card: 'summary_large_image',
         title: title,
         description: description,
-        ...(ogImageUrl && { images: [ogImageUrl] }),
+        images: [ogImageUrl],
       }
     };
   } catch (error) {
     console.error('Error fetching metadata:', error);
     
-    // Fallback to default metadata if API fails
+
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    const fallbackFavicon = '/favicon.ico';
+    const fallbackOgImage = `${baseUrl}/images/default-og-image.jpg`;
+    
     return {
-      metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL),
+      metadataBase: new URL(baseUrl),
       title: {
-        default: 'Top Lifestyle Blog by Kasun Sameera | Kasun Sameera',
-        template: '%s | Kasun Sameera'
+        default: 'Website Title | Website Name',
+        template: '%s | Website Name'
       },
-      description: 'Lifestyle Blog by Top Blogger Kasun Sameera. A personal blogging site, where you see passions, experiences, and journey as I explored the things I love doing',
+      description: 'Website Description',
+      
+
+      icons: {
+        icon: fallbackFavicon,
+        shortcut: fallbackFavicon,
+        apple: fallbackFavicon,
+      },
+      
+
+      openGraph: {
+        title: 'Website Title',
+        description: 'Website Description',
+        siteName: 'Website Name',
+        images: [
+          {
+            url: fallbackOgImage,
+            width: 1200,
+            height: 630,
+            alt: 'Website Title',
+          }
+        ],
+      },
+      
+
+      twitter: {
+        card: 'summary_large_image',
+        title: 'Website Title',
+        description: 'Website Description',
+        images: [fallbackOgImage],
+      }
     };
   }
 }

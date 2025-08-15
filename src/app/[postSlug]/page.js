@@ -6,15 +6,20 @@ import HTMLRendererClient from "@/components/blogs/HTMLRendererClient";
 import BacktoTop from "@/components/shared/BacktoTop";
 import ShareButtons from "@/components/blogs/ShareButtons";
 import { notFound } from "next/navigation";
+import fetchPageMeta from "@/data/fetchPageMeta";
 
 export async function generateMetadata({ params }) {
     try {
+
+        const metaResponse = await fetchPageMeta();
+        const metaData = metaResponse?.data || {};
+
         const resolvedParams = await params;
         const blog = await fetchPosts(`filters[postSlug][$eq]=${resolvedParams.postSlug}`);
 
         if (!blog.data || blog.data.length === 0) {
             return {
-                title: 'Blog Post Not Found | Kasun Sameera',
+                title: 'Blog Post Not Found',
                 description: 'The requested blog post could not be found. Browse our latest articles on web hosting, domains, and technology.',
                 robots: {
                     index: false,
@@ -24,9 +29,9 @@ export async function generateMetadata({ params }) {
         }
 
         const post = blog.data[0];
-        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.kasunsameera.com';
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-        const siteName = 'Kasun Sameera';
+        const siteName = metaData.websiteName || 'Website Name';
         const fullTitle = post.postMetadata?.postTitle || post.title || 'Blog Post';
 
         const description = post.postMetadata?.metaDescription || post.postPrimary?.excerpt || post.title || 'Read our latest blog post about web hosting, domains, and technology solutions.';
@@ -93,7 +98,7 @@ export async function generateMetadata({ params }) {
     } catch (error) {
         console.error('Error generating metadata:', error);
         return {
-            title: 'Blog Post | SeekaHost',
+            title: 'Blog Post',
             description: 'Read our latest blog post about web hosting, domains, and technology solutions.',
             robots: {
                 index: false,
