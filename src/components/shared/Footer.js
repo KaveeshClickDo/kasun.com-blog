@@ -108,7 +108,7 @@ export default async function Footer() {
               {footerData?.footerQuickLinks?.map((link) => (
                 <li key={link.id}>
                   <Link 
-                    href={link.linkAddress} 
+                    href={link.linkAddress || "#"} 
                     className="transition-colors hover:opacity-80"
                     style={{ color: footerData?.footerFontColor || '#d1d5db' }}
                   >
@@ -125,7 +125,7 @@ export default async function Footer() {
               {footerData?.footerSocialMedia?.map((social) => (
                 <Link
                   key={social.id}
-                  href={social.socialMediaLink}
+                  href={social.socialMediaLink || "#"}
                   className="transition-colors hover:opacity-80"
                   style={{ color: footerData?.footerFontColor || '#d1d5db' }}
                   target="_blank"

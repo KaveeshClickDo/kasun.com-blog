@@ -42,7 +42,7 @@ export default function Header() {
             {headerData?.addHeaderNavigations?.map((nav) => (
                 <Link
                     key={nav.id}
-                    href={nav.pageLink}
+                    href={nav.pageLink || "#"}
                     className="relative p-4 hover:underline"
                     style={{ color: headerData?.headerFontColor || '#ffffff' }}
                 >
@@ -63,7 +63,7 @@ export default function Header() {
                 {headerData?.addHeaderNavigations?.map((nav) => (
                     <Link 
                         key={nav.id}
-                        href={nav.pageLink} 
+                        href={nav.pageLink || "#"} 
                         className="block px-4 py-2 hover:bg-gray-100 text-lg font-medium" 
                         style={{ color: headerData?.headerFontColor || '#ffffff' }}
                         onClick={() => setMobileMenuOpen(false)}
