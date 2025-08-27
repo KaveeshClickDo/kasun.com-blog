@@ -115,7 +115,7 @@ const CategoryPage = async (props) => {
         }
 
         const categoryPostsResponse = await fetchPosts(
-            `filters[postPrimary][category][$eq]=${encodeURIComponent(validCategory)}&sort[0]=publishedAt:desc&pagination[page]=${currentPage}&pagination[pageSize]=${postsPerPage}`
+            `filters[postPrimary][category][$eq]=${encodeURIComponent(validCategory)}&sort[0]=createdAt:desc&pagination[page]=${currentPage}&pagination[pageSize]=${postsPerPage}`
         );
 
         const categoryPosts = categoryPostsResponse.data || [];
@@ -163,8 +163,8 @@ const CategoryPage = async (props) => {
 
                                         <div className="p-4">
                                             <div className="flex items-center text-xs md:text-sm text-gray-500 font-medium mb-2">
-                                                <time dateTime={blog.publishedAt}>
-                                                    {blog.publishedAt?.substring(0, 10) || 'No date'}
+                                                <time dateTime={blog.createdAt}>
+                                                    {blog.createdAt?.substring(0, 10) || 'No date'}
                                                 </time>
                                                 <span className="mx-2">•</span>
                                                 <span>{blog.postPrimary?.category || 'Uncategorized'}</span>

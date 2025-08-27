@@ -61,7 +61,7 @@ const FeaturedSlider = ({ featuredBlogs, config }) => {
         )}
         <div>
           <div className="font-semibold text-sm">{authorName}</div>
-          <div className="text-xs text-gray-500">{featuredBlog.publishedAt?.substring(0, 10) || 'No date'}</div>
+          <div className="text-xs text-gray-500">{featuredBlog.createdAt?.substring(0, 10) || 'No date'}</div>
         </div>
       </div>
     );

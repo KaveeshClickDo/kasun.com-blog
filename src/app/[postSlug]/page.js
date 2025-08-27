@@ -120,7 +120,7 @@ const BlogPost = async (props) => {
 
         let recentPosts = [];
         try {
-            const recentBlogsResponse = await fetchPosts(`sort[0]=updatedAt:desc&pagination[limit]=6`);
+            const recentBlogsResponse = await fetchPosts(`sort[0]=createdAt:desc&pagination[limit]=6`);
 
             if (recentBlogsResponse.data && recentBlogsResponse.data.length > 0) {
                 recentPosts = recentBlogsResponse.data
@@ -299,7 +299,7 @@ const BlogPost = async (props) => {
                                             <span className="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/20 backdrop-blur-sm font-medium border border-blue-600/30">
                                                 {post.postPrimary?.category}
                                             </span>
-                                            <span>{post.updatedAt?.substring(0, 10)}</span>
+                                            <span>{post.createdAt?.substring(0, 10)}</span>
                                         </div>
 
                                         <h1 className="text-2xl lg:text-4xl font-bold mb-4">

@@ -10,9 +10,9 @@ const Home = async () => {
 
     try {
 
-        const featuredPosts = await fetchPosts('filters[postMetadata][isFeatured][$eq]=YES&sort[0]=publishedAt:desc');
+        const featuredPosts = await fetchPosts('filters[postMetadata][isFeatured][$eq]=YES&sort[0]=createdAt:desc');        
 
-        const topStoriesPosts = await fetchPosts('pagination[limit]=3&sort[0]=publishedAt:desc');
+        const topStoriesPosts = await fetchPosts('pagination[limit]=3&sort[0]=createdAt:desc');
 
         const categoriesResponse = await fetchPosts();
         const uniqueCategories = [...new Set(
@@ -21,7 +21,7 @@ const Home = async () => {
 
         const categoryPosts = {};
         for (const category of uniqueCategories) {
-            const categoryPostsData = await fetchPosts(`filters[postPrimary][category][$eq]=${encodeURIComponent(category)}&pagination[limit]=3&sort[0]=publishedAt:desc`);
+            const categoryPostsData = await fetchPosts(`filters[postPrimary][category][$eq]=${encodeURIComponent(category)}&pagination[limit]=3&sort[0]=createdAt:desc`);
             categoryPosts[category] = categoryPostsData.data || [];
         }
 
@@ -55,7 +55,7 @@ const Home = async () => {
 
                                         <div className="p-4">
                                             <div className="flex items-center text-xs md:text-sm text-gray-500 font-medium mb-2">
-                                                <span>{topBlog.publishedAt?.substring(0, 10) || 'No date'}</span>
+                                                <span>{topBlog.createdAt?.substring(0, 10) || 'No date'}</span>
                                                 <span className="mx-2">•</span>
                                                 <span>{topBlog.postPrimary?.category || 'Uncategorized'}</span>
                                                 {topBlog.postPrimary?.readTime && (
@@ -107,7 +107,7 @@ const Home = async () => {
 
                                                 <div className="p-4">
                                                     <div className="flex items-center text-xs md:text-sm text-gray-500 font-medium mb-2">
-                                                        <span>{blog.publishedAt?.substring(0, 10) || 'No date'}</span>
+                                                        <span>{blog.createdAt?.substring(0, 10) || 'No date'}</span>
                                                         <span className="mx-2">•</span>
                                                         <span>{blog.postPrimary?.category || 'Uncategorized'}</span>
                                                         {blog.postPrimary?.readTime && (
