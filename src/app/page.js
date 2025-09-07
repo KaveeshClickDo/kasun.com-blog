@@ -15,16 +15,29 @@ const Home = async () => {
         const topStoriesPosts = await fetchPosts('pagination[limit]=3&sort[0]=createdAt:desc');
 
         const categoriesResponse = await fetchPosts();
+        
         const uniqueCategories = [...new Set(
-            categoriesResponse.data?.map(post => post.postPrimary?.category).filter(Boolean) || []
+            categoriesResponse.data?.flatMap(post => 
+                post.postPrimary?.categories || []
+            ).filter(Boolean) || []
         )];
 
+        // Get posts for each category
         const categoryPosts = {};
         for (const category of uniqueCategories) {
-            const categoryPostsData = await fetchPosts(`filters[postPrimary][category][$eq]=${encodeURIComponent(category)}&pagination[limit]=3&sort[0]=createdAt:desc`);
-            categoryPosts[category] = categoryPostsData.data || [];
+            const postsInCategory = categoriesResponse.data?.filter(post => 
+                post.postPrimary?.categories?.includes(category)
+            ) || [];
+            
+            categoryPosts[category] = postsInCategory
+                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                .slice(0, 3);
         }
 
+        // Helper function to create category URL
+        const createCategoryUrl = (category) => {
+            return `/category/${category ? category.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-') : '#'}`;
+        };
 
         return (
             <>
@@ -57,7 +70,23 @@ const Home = async () => {
                                             <div className="flex items-center text-xs md:text-sm text-gray-500 font-medium mb-2">
                                                 <span>{topBlog.createdAt?.substring(0, 10) || 'No date'}</span>
                                                 <span className="mx-2">•</span>
-                                                <span>{topBlog.postPrimary?.category || 'Uncategorized'}</span>
+                                                <span>
+                                                    {topBlog.postPrimary?.categories?.length > 0 ? (
+                                                        topBlog.postPrimary.categories.map((category, index) => (
+                                                            <span key={category}>
+                                                                <Link 
+                                                                    href={createCategoryUrl(category)}
+                                                                    className="hover:text-[#2072CC] hover:underline transition-colors"
+                                                                >
+                                                                    {category}
+                                                                </Link>
+                                                                {index < topBlog.postPrimary.categories.length - 1 && ', '}
+                                                            </span>
+                                                        ))
+                                                    ) : (
+                                                        'Uncategorized'
+                                                    )}
+                                                </span>
                                                 {topBlog.postPrimary?.readTime && (
                                                     <>
                                                         <span className="mx-2">•</span>
@@ -109,7 +138,23 @@ const Home = async () => {
                                                     <div className="flex items-center text-xs md:text-sm text-gray-500 font-medium mb-2">
                                                         <span>{blog.createdAt?.substring(0, 10) || 'No date'}</span>
                                                         <span className="mx-2">•</span>
-                                                        <span>{blog.postPrimary?.category || 'Uncategorized'}</span>
+                                                        <span>
+                                                            {blog.postPrimary?.categories?.length > 0 ? (
+                                                                blog.postPrimary.categories.map((category, index) => (
+                                                                    <span key={category}>
+                                                                        <Link 
+                                                                            href={createCategoryUrl(category)}
+                                                                            className="hover:text-[#2072CC] hover:underline transition-colors"
+                                                                        >
+                                                                            {category}
+                                                                        </Link>
+                                                                        {index < blog.postPrimary.categories.length - 1 && ', '}
+                                                                    </span>
+                                                                ))
+                                                            ) : (
+                                                                'Uncategorized'
+                                                            )}
+                                                        </span>
                                                         {blog.postPrimary?.readTime && (
                                                             <>
                                                                 <span className="mx-2">•</span>
@@ -136,7 +181,7 @@ const Home = async () => {
                                     </div>
                                 )}
                                 <Link
-                                    href={`/category/${category ? category.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-') : '#'}`}
+                                    href={createCategoryUrl(category)}
                                     className="flex items-center font-bold text-lg hover:text-[#2072CC] transition-colors gap-1 sm:gap-2 py-6 ml-2"
                                 >
                                     Read More <MdArrowForward className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />

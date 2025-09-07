@@ -1,4 +1,3 @@
-// app/llms.txt/route.js
 import fetchPosts from '@/data/fetchPosts';
 
 export async function GET() {
@@ -8,14 +7,16 @@ export async function GET() {
     // Fetch all posts
     const allPosts = await fetchPosts('sort[0]=publishedAt:desc');
     
-    // Get categories
+    // Get categories from the categories array
     const categoriesResponse = await fetchPosts();
     const uniqueCategories = [...new Set(
-      categoriesResponse.data?.map(post => post.postPrimary?.category).filter(Boolean) || []
+      categoriesResponse.data?.flatMap(post => 
+        post.postPrimary?.categories || []
+      ).filter(Boolean) || []
     )];
 
-    // Get recent posts (last 10)
-    const recentPosts = allPosts.data?.slice(0, 10) || [];
+    // All posts (sorted by publication date)
+    const posts = allPosts.data || [];
     
     // Build llms.txt content
     const llmsContent = `# llms.txt
@@ -36,14 +37,16 @@ ${uniqueCategories.map(category => {
   return `- ${category}: ${baseUrl}/category/${categorySlug}`;
 }).join('\n')}
 
-## Recent Posts
-${recentPosts.map(post => {
+## All Posts
+${posts.map(post => {
   const title = post.title || 'Untitled';
   const slug = post.postSlug || '';
-  const publishedAt = new Date(post.publishedAt).toISOString().split('T')[0];
+  const publishedAt = new Date(post.publishedAt || post.createdAt).toISOString().split('T')[0];
   const excerpt = post.postPrimary?.excerpt || '';
+  const categories = post.postPrimary?.categories?.join(', ') || 'Uncategorized';
   
-  return `- [${title}](${baseUrl}/${slug}) (${publishedAt})${excerpt ? `\n  ${excerpt.substring(0, 150)}${excerpt.length > 150 ? '...' : ''}` : ''}`;
+  return `- [${title}](${baseUrl}/${slug}) (${publishedAt})
+  Categories: ${categories}${excerpt ? `\n  ${excerpt.substring(0, 150)}${excerpt.length > 150 ? '...' : ''}` : ''}`;
 }).join('\n\n')}
 
 ## Content Guidelines
@@ -51,6 +54,7 @@ ${recentPosts.map(post => {
 - Topics include: ${uniqueCategories.slice(0, 5).join(', ')}${uniqueCategories.length > 5 ? ', and more' : ''}
 - Content is regularly updated and maintained
 - Posts include technical tutorials, industry insights, and personal experiences
+- Posts can belong to multiple categories
 
 ## Contact & Usage
 - This content is publicly available for learning and reference
@@ -62,6 +66,7 @@ ${recentPosts.map(post => {
 - Content managed through Strapi CMS
 - Responsive design optimized for all devices
 - SEO optimized with proper meta tags and structured data
+- Multi-category system allows posts to be tagged with multiple topics
 
 ## Crawling Instructions
 - Sitemap available at: ${baseUrl}/sitemap.xml
@@ -71,7 +76,7 @@ ${recentPosts.map(post => {
 
 ---
 Generated: ${new Date().toISOString()}
-Total Posts: ${allPosts.data?.length || 0}
+Total Posts: ${posts.length}
 Total Categories: ${uniqueCategories.length}`;
 
     return new Response(llmsContent, {

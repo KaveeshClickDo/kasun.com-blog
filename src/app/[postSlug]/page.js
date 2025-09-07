@@ -8,6 +8,10 @@ import ShareButtons from "@/components/blogs/ShareButtons";
 import { notFound } from "next/navigation";
 import fetchPageMeta from "@/data/fetchPageMeta";
 
+const createCategoryUrl = (category) => {
+    return `/category/${category ? category.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-') : '#'}`;
+};
+
 export async function generateMetadata({ params }) {
     try {
 
@@ -41,7 +45,7 @@ export async function generateMetadata({ params }) {
             : `${baseUrl}/images/blog/default-blog-image.jpg`;
 
         const keywords = [
-            post.postPrimary?.category,
+            ...(post.postPrimary?.categories || []),
             ...(post.postPrimary?.tags || []),
             'blogs',
             'domains',
@@ -62,7 +66,7 @@ export async function generateMetadata({ params }) {
                 }
             ] : [{ name: siteName }],
             publisher: siteName,
-            category: post.postPrimary?.category,
+            category: post.postPrimary?.categories?.[0],
             robots: {
                 index: true,
                 follow: true,
@@ -82,7 +86,7 @@ export async function generateMetadata({ params }) {
                 publishedTime: post.createdAt,
                 modifiedTime: post.updatedAt,
                 authors: post.authorDetails?.authorName ? [post.authorDetails.authorName] : undefined,
-                section: post.postPrimary?.category || undefined,
+                section: post.postPrimary?.categories?.[0] || undefined,
                 tags: post.postPrimary?.tags || undefined,
             },
             twitter: {
@@ -201,8 +205,11 @@ const BlogPost = async (props) => {
                                 '@type': 'WebPage',
                                 '@id': `${typeof window !== 'undefined' ? window.location.href : ''}`
                             },
-                            ...(post.postPrimary?.category && {
-                                articleSection: post.postPrimary.category
+                            ...(post.postPrimary?.categories?.length > 0 && {
+                                articleSection: post.postPrimary.categories
+                            }),
+                            ...(post.postPrimary?.categories?.length > 0 && {
+                                keywords: post.postPrimary.categories
                             })
                         };
 
@@ -228,15 +235,15 @@ const BlogPost = async (props) => {
                             }
                         ];
 
-                        // Add category if exists
-                        if (post.postPrimary?.category) {
+                        // Add primary category if exists
+                        if (post.postPrimary?.categories?.[0]) {
                             breadcrumbItems.push({
                                 "@type": "ListItem",
                                 "position": 3,
-                                "name": post.postPrimary.category,
+                                "name": post.postPrimary.categories[0],
                                 "item": {
                                     "@type": "WebPage",
-                                    "@id": `${baseUrl}/category/${post.postPrimary.category.toLowerCase().replace(/\s+/g, '-')}`
+                                    "@id": `${baseUrl}/category/${post.postPrimary.categories[0].toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-')}`
                                 }
                             });
                         }
@@ -273,14 +280,21 @@ const BlogPost = async (props) => {
                             <Link href="/" className="hover:text-[#2072CC]">Home</Link>
                             <span className="mx-2">›</span>
 
-                            {blog.data?.[0]?.postPrimary?.category && (
+                            {blog.data?.[0]?.postPrimary?.categories?.length > 0 && (
                                 <>
-                                    <Link
-                                        href={`/category/${blog.data[0].postPrimary.category.toLowerCase().replace(/\s+/g, '-')}`}
-                                        className="hover:text-[#2072CC]"
-                                    >
-                                        {blog.data[0].postPrimary.category}
-                                    </Link>
+                                    <span>
+                                        {blog.data[0].postPrimary.categories.map((category, index) => (
+                                            <span key={category}>
+                                                <Link
+                                                    href={createCategoryUrl(category)}
+                                                    className="hover:text-[#2072CC]"
+                                                >
+                                                    {category}
+                                                </Link>
+                                                {index < blog.data[0].postPrimary.categories.length - 1 && ', '}
+                                            </span>
+                                        ))}
+                                    </span>
                                     <span className="mx-2">›</span>
                                 </>
                             )}
@@ -296,9 +310,21 @@ const BlogPost = async (props) => {
                                         <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-purple-100 to-transparent rounded-full opacity-50 -translate-y-32 translate-x-32"></div>
 
                                         <div className="flex flex-wrap items-center gap-4 text-sm mb-4">
-                                            <span className="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/20 backdrop-blur-sm font-medium border border-blue-600/30">
-                                                {post.postPrimary?.category}
-                                            </span>
+                                            {post.postPrimary?.categories?.length > 0 ? (
+                                                post.postPrimary.categories.map((category, index) => (
+                                                    <Link
+                                                        key={category}
+                                                        href={createCategoryUrl(category)}
+                                                        className="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/20 backdrop-blur-sm font-medium border border-blue-600/30 hover:bg-blue-500/30 transition-colors"
+                                                    >
+                                                        {category}
+                                                    </Link>
+                                                ))
+                                            ) : (
+                                                <span className="inline-flex items-center px-3 py-1 rounded-full bg-gray-500/20 backdrop-blur-sm font-medium border border-gray-600/30">
+                                                    Uncategorized
+                                                </span>
+                                            )}
                                             <span>{post.createdAt?.substring(0, 10)}</span>
                                         </div>
 

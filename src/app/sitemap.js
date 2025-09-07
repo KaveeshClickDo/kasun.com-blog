@@ -7,10 +7,12 @@ export default async function sitemap() {
     // Fetch all posts
     const allPosts = await fetchPosts('sort[0]=publishedAt:desc');
 
-    // Get categories
+    // Get categories from the categories array
     const categoriesResponse = await fetchPosts();
     const uniqueCategories = [...new Set(
-      categoriesResponse.data?.map(post => post.postPrimary?.category).filter(Boolean) || []
+      categoriesResponse.data?.flatMap(post => 
+        post.postPrimary?.categories || []
+      ).filter(Boolean) || []
     )];
 
     // Static pages
@@ -34,7 +36,6 @@ export default async function sitemap() {
         priority: 0.8,
       },
     ];
-
 
     // Blog posts
     const blogPosts = allPosts.data?.map(post => ({
