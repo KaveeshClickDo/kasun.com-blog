@@ -409,7 +409,7 @@ const BlogPost = async (props) => {
                                         <h3 className="text-2xl font-bold my-2">Free SSL Certificates</h3>
                                         <Image src="/images/shared/header-logo.webp" alt="SeekaHost" className="mx-auto" width={266} height={124} priority />
                                     </div>
-                                    <Link href='/pricing' className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-4 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                                    <Link href='https://www.seekahost.co.uk' className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-4 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                                         Get Started Free
                                     </Link>
                                 </div>
