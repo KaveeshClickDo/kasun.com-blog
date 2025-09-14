@@ -34,6 +34,19 @@ const Home = async () => {
                 .slice(0, 3);
         }
 
+        // Sort categories by post count (highest to lowest)
+        const sortedCategories = uniqueCategories.sort((a, b) => {
+            const aPostCount = categoriesResponse.data?.filter(post => 
+                post.postPrimary?.categories?.includes(a)
+            ).length || 0;
+            
+            const bPostCount = categoriesResponse.data?.filter(post => 
+                post.postPrimary?.categories?.includes(b)
+            ).length || 0;
+            
+            return bPostCount - aPostCount; // Sort descending (highest first)
+        });
+
         // Helper function to create category URL
         const createCategoryUrl = (category) => {
             return `/category/${category ? category.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-') : '#'}`;
@@ -114,8 +127,8 @@ const Home = async () => {
                         )}
                     </div>
 
-                    {uniqueCategories.length > 0 ? (
-                        uniqueCategories.map(category => (
+                    {sortedCategories.length > 0 ? (
+                        sortedCategories.map(category => (
                             <div key={category} className="mb-8">
                                 <h2 className="text-2xl md:text-4xl font-bold mb-6">{category}</h2>
                                 {categoryPosts[category] && categoryPosts[category].length > 0 ? (
