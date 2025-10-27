@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import fetchCustomFooter from '@/data/fetchCustomFooter';
+import Newsletter from '@/components/shared/Newsletter';
 
 export default async function Footer() {
 
@@ -10,10 +11,8 @@ export default async function Footer() {
     footerData = response?.data || {};
   } catch (error) {
     console.error('Error fetching footer data:', error);
-
     footerData = {};
   }
-
 
   const renderTextWithLineBreaks = (text) => {
     if (!text) return '';
@@ -24,7 +23,6 @@ export default async function Footer() {
       </span>
     ));
   };
-
 
   const getSocialIcon = (socialMediaName) => {
     const name = socialMediaName.toLowerCase();
@@ -121,7 +119,7 @@ export default async function Footer() {
 
           <div>
             <h3 className="font-semibold mb-4" style={{ color: footerData?.footerFontColor || '#ffffff' }}>Connect</h3>
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 mb-6">
               {footerData?.footerSocialMedia?.map((social) => (
                 <Link
                   key={social.id}
@@ -136,6 +134,9 @@ export default async function Footer() {
                 </Link>
               ))}
             </div>
+
+            {/* Newsletter Section */}
+            <Newsletter />
           </div>
         </div>
 
