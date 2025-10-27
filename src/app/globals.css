@@ -40,3 +40,8 @@ body {
   visibility: hidden !important;
   pointer-events: none !important;
 }
+
+.newsletter-section {
+  /* Add any custom styling here */
+  padding: 2rem 0;
+}

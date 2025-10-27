@@ -3,6 +3,7 @@ import './globals.css';
 import { breadcrumbSchema } from './schema';
 import '../styles/ckeditor-content.css';
 import Header from '@/components/shared/Header';
+import Newsletter from '@/components/shared/Newsletter';
 import Footer from '@/components/shared/Footer';
 import fetchPageMeta from '@/data/fetchPageMeta';
 
@@ -150,6 +151,7 @@ export default function RootLayout({ children }) {
       <body suppressHydrationWarning className={`${dmSans.variable} antialiased`}>
         <Header />
         <main className="min-h-screen">{children}</main>
+        <Newsletter />
         <Footer />
       </body>
     </html>
