@@ -7,6 +7,7 @@ import BacktoTop from "@/components/shared/BacktoTop";
 import ShareButtons from "@/components/blogs/ShareButtons";
 import { notFound } from "next/navigation";
 import fetchPageMeta from "@/data/fetchPageMeta";
+import Script from "next/script";
 
 const createCategoryUrl = (category) => {
     return `/category/${category ? category.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-') : '#'}`;
@@ -166,6 +167,23 @@ const BlogPost = async (props) => {
 
         return (
             <>
+                <Script
+                    src="https://news.google.com/swg/js/v1/swg-basic.js"
+                    strategy="afterInteractive"
+                    async
+                />
+                <Script id="swg-init" strategy="afterInteractive">
+                    {`
+                        (self.SWG_BASIC = self.SWG_BASIC || []).push(basicSubscriptions => {
+                            basicSubscriptions.init({
+                                type: "NewsArticle",
+                                isPartOfType: ["Product"],
+                                isPartOfProductId: "CAow8_TCDA:openaccess",
+                                clientOptions: { theme: "light", lang: "en-GB" },
+                            });
+                        });
+                    `}
+                </Script>
 
                 <article className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
 
